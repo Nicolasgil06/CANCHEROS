@@ -1,0 +1,102 @@
+crear archivo en escritorio
+crear repositorio en github con el mismo nombre de carpeta
+o crear un nuevo repositorio en la línea de comando
+echo "# pet-stylo" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/LordProgrammeur/pet-stylo.git
+git push -u origin main
+
+git remote add origin https://github.com/LordProgrammeur/pet-stylo.git
+git branch -M main
+git push -u origin main
+
+panel de control>cuentas>administrador de credenciales>credenciales de windows>quitar cuentas de github(indispensable hacerlo para enlazar cuenta)
+
+en git bash: AMBIENTE 201@DESKTOP-JM874TI MINGW64 ~/Desktop/pet-stylo
+$ git config --global user.name "LordProgrammeur"
+
+AMBIENTE 201@DESKTOP-JM874TI MINGW64 ~/Desktop/pet-stylo
+$ git config --global user.email "david91ortiz14@gmail.com"
+
+AMBIENTE 201@DESKTOP-JM874TI MINGW64 ~/Desktop/pet-stylo
+$ git init
+Initialized empty Git repository in C:/Users/AMBIENTE 314/Desktop/pet-stylo/.git/
+
+Cambiar a rama main
+
+AMBIENTE 201@DESKTOP-JM874TI MINGW64 ~/Desktop/pet-stylo (master)
+$ git branch -M main
+
+AMBIENTE 201@DESKTOP-JM874TI MINGW64 ~/Desktop/pet-stylo (main)
+$ git remote add origin https://github.com/LordProgrammeur/pet-stylo.git
+ (esta conectando con el repositorio que queremos)
+
+AMBIENTE 201@DESKTOP-JM874TI MINGW64 ~/Desktop/pet-stylo (main)
+$ git add .(poner el area de preparacion, el espacio . son todos los cambios que se hizo en la pagina)
+
+AMBIENTE 201@DESKTOP-JM874TI MINGW64 ~/Desktop/pet-stylo (main)
+$ git commit -m "creacion-login" (punto de restauracion del proyecto)
+
+Despues de que se crea por primera vez que el repositorio se usa: 
+git push -u origin main (importante)>sale letrero para entrar por navegador>copiar url y pegar en otro motor de busqueda y tiene que salir esto en consola:
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 801 bytes | 801.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/LordProgrammeur/pet-stylo.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+
+Recargar pagina y verificar que las carpetas esten en el github
+
+Para actualizar el github con nuevos archivos o modificaciones en proyecto de nuevo se utiliza:
+
+AMBIENTE 201@DESKTOP-JM874TI MINGW64 ~/Desktop/pet-stylo (main)
+$ git add .
+
+AMBIENTE 201@DESKTOP-JM874TI MINGW64 ~/Desktop/pet-stylo (main)
+$ git commit -m "actualizar carpeta"
+[main b610fd0] actualizar carpeta
+ 2 files changed, 76 insertions(+), 11 deletions(-)
+ create mode 100644 docs/instrucciones github.txt
+
+AMBIENTE 201@DESKTOP-JM874TI MINGW64 ~/Desktop/pet-stylo (main)
+$ git push -u origin main
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 1.09 KiB | 1.09 MiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+To https://github.com/LordProgrammeur/pet-stylo.git
+   35544f1..b610fd0  main -> main
+branch 'main' set up to track 'origin/main'.
+
+clear para limpiar todo
+
+Video curso de git: https://www.youtube.com/watch?v=sH9g77J92ns
+
+Subir archivo de edicion y presentacion en github.
+
+Clonar proyecto:
+
+Abrir cuenta github en pc master>en la pagina you repositorio>abro proyecto>click derecho en escriotio y abrir gitbash> y los siguientes comandos got clone > abrir en la pagina el code del pryecto y pegar despues del git clone el url
+> crea de nuevo la carpeta y entro en la misa y con click derecho git bash here para que en consola abra el proyecto de una.
+
+Abri en otro pc para trabajar y de nuevo estos comandos:
+
+AMBIENTE 201@DESKTOP-JM874TI MINGW64 ~/Desktop/pet-stylo
+$ git config --global user.name "LordProgrammeur"
+
+AMBIENTE 201@DESKTOP-JM874TI MINGW64 ~/Desktop/pet-stylo
+$ git config --global user.email "david91ortiz14@gmail.com"
+
+(importannte)Para abrir de nuevo proyecto en pc de casa cuando se modificaron archivos en otro pc:
+Abrir la carpeta del proyecto y click derecho git bash  here e inmediatamente comando
+$git pull
