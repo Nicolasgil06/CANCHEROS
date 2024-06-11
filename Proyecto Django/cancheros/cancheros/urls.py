@@ -21,9 +21,10 @@ from django.http import HttpResponse
 def cancheros(request):
     return HttpResponse('jostin cabron')
 
-urlpatterns = [
+urlpatterns = [   
+    path("", include('home.urls')),
     path('admin/', admin.site.urls),
-    path('website/', include('website.urls')),
+    path('home/', include('home.urls')),
     path('cancheros/', cancheros),
 ]
 

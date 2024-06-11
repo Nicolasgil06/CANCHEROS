@@ -1,25 +1,27 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script scr="java.js"></script>
-    <link rel="stylesheet" href="assets/css/styles.css">   
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styles.css' %}">
     <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
-    <script src="assets/js/scripts.js"></script>
+
 </head>
 <body>
-    <center><img src="assets/img/cancheros.png"></center>
-    {% block content}
+    <center><img src="{% static 'assets/images/cancheros.png' %}" alt=""></center>
+    {% block content %}
 
     {% endblock %}
 
-    <footer>
+   <!--  <footer>
         <p>&copy; 2024 Mi Sitio Web. Todos los derechos reservados.</p>
-    </footer>
+    </footer> -->
 
-
-
+     <!-- Cargar el archivo JavaScript -->
+     <script src="{% static 'assets/js/script.js' %}"></script>
+     
 </body>
 </html>
