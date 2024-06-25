@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.http import HttpResponse
 
 def cancheros(request):
-    return HttpResponse('jostin cabron')
+    return HttpResponse('cancheros')
 
 urlpatterns = [   
     path("", include('home.urls')),

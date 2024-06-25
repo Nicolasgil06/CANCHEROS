@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
-from .forms import UsuarioForm, ReservaForm, CanchaReservaForm
+from . import models
+from django.contrib import messages
+
+
 #aca se renderisa la pagina web en el index de html
 def index(request):
     return render(request, 'index.html')
@@ -7,9 +10,37 @@ def index(request):
 def reserva(request):
     return render(request, 'reserva.html')
 
+def usuario(request):
+    return render(request, 'UsuarioForm.html')
+
+def Usuarioform(request):
+    if request.method == 'POST':
+        form = Usuarioform(request.POST)
+        if form.is_valid():
+            usuario = form.save(commit=False)
+            usuario.nombre_apellido = request.POST['nombre_apellido']
+            usuario.telefono =request.POST['telefono']
+            usuario.correo = request.POST['correo']
+            usuario.id_documento = request.POST['id_documento']
+            usuario.numero_documento = request.POST['numero_documento']
+            usuario.id_rol = request.POST['id_rol']            
+            usuario.save()
+            messages.success(request, 'Guardado!')
+            return redirect('')
+
+        else:
+            messages.error(request, form.errors)
+            return redirect('')
+    else:
+        resultsTipoDoc  = models.Tipo_Documento.objects.all()
+        resultsRol     = models.Rol.objects.all().order_by('Nombre')        
+        return render(request, "UsuarioForm.html",
+                          context={'tipodoc': resultsTipoDoc, 'lstRol': resultsRol,})
+
+
 #si el método es post es decir envió de información se capturan los datos se guardan en la base de datos
 #  y se muestra una pagina de registro exitoso/tutorial el poder de django
-def formulario_reserva(request):
+""" def formulario_reserva(request):
     if request.method == 'POST':
         usuario_form = UsuarioForm(request.POST)
         reserva_form = ReservaForm(request.POST)
@@ -30,4 +61,4 @@ def formulario_reserva(request):
         reserva_form = ReservaForm()
         cancha_reserva_form = CanchaReservaForm()
 
-    return render(request, 'formulario_reserva.html', {'usuario_form': usuario_form, 'reserva_form': reserva_form, 'cancha_reserva_form': cancha_reserva_form})
+    return render(request, 'formulario_reserva.html', {'usuario_form': usuario_form, 'reserva_form': reserva_form, 'cancha_reserva_form': cancha_reserva_form}) """
