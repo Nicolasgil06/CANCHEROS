@@ -3,6 +3,7 @@ from . import models
 from django.contrib import messages
 
 
+
 #aca se renderisa la pagina web en el index de html
 def index(request):
     return render(request, 'index.html')
@@ -14,6 +15,7 @@ def usuario(request):
     return render(request, 'UsuarioForm.html')
 
 def Usuarioform(request):
+    print("Entrando a la vista Usuarioform_view") 
     if request.method == 'POST':
         form = Usuarioform(request.POST)
         if form.is_valid():
@@ -26,16 +28,21 @@ def Usuarioform(request):
             usuario.id_rol = request.POST['id_rol']            
             usuario.save()
             messages.success(request, 'Guardado!')
-            return redirect('')
+            return redirect('usuario')
 
         else:
             messages.error(request, form.errors)
-            return redirect('')
+            return redirect('usuario')
     else:
-        resultsTipoDoc  = models.Tipo_Documento.objects.all()
-        resultsRol     = models.Rol.objects.all().order_by('Nombre')        
-        return render(request, "UsuarioForm.html",
-                          context={'tipodoc': resultsTipoDoc, 'lstRol': resultsRol,})
+        # Obtener los registros de Tipo_Documento y Rol
+        resultsTipoDoc = models.TipoDocumento.objects.all()
+        resultsRol = models.Rol.objects.all().order_by('nombre_rol')
+
+        print("Tipos de Documento:", resultsTipoDoc)  # Agrega esto para verificar si los datos se obtienen correctamente
+        print("Roles:", resultsRol)  # Agrega esto para verificar si los datos se obtienen correctamente
+
+        # Renderizar la plantilla con los datos
+        return render(request, "UsuarioForm.html", context={'tipodoc': resultsTipoDoc, 'lstRol': resultsRol})
 
 
 #si el método es post es decir envió de información se capturan los datos se guardan en la base de datos

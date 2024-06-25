@@ -3,10 +3,10 @@
 {% load static %}
 {% block content %}
     
-    
-<form method="post" enctype="multipart/form-data">
+<center>    
+<form method="post" enctype="multipart/form-data" action="{% url 'usuario' %}">
     {% csrf_token %}
-    {{ form.as_p }}
+
 
   <div class="form-group row">
   <label class="col-sm-2 col-form-label" for="nombre_apellido"> Nombres y Apellidos: </label>
@@ -52,5 +52,6 @@
   
   <input type="submit" value="Guardar" class="btn btn-primary">
 </form>
+</center>
 
 {% endblock %}
