@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.http import HttpResponse
 
 def cancheros(request):
-    return HttpResponse('cs')
+    return HttpResponse('sustentacion')
 
 urlpatterns = [   
     path("", include('home.urls')),
