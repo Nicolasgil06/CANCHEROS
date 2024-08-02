@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}inicio-cancheros {% endblock %}
+
+{% block content %}
+
+
+<div id="mensaje-bienvenida">
+    <p><strong>Bienvenidos al espacio de reserva exclusivo de la cancha zonal de bonanza</strong></p>
+</div> 
+
+<script type="text/javascript">
+    function irReserva() {
+        window.location.href = "{% url 'usuario' %}";
+    }
+
+    function irConsulta() {
+        window.location.href = "{% url 'reserva' %}";
+    }
+
+    function irCancelar() {
+        window.location.href = "{% url 'reserva' %}";
+    }
+</script>
+
+<div class="opciones">
+    <button class="boton" onclick="irReserva()">Realiza tu reserva</button>
+    <button class="boton" onclick="irConsulta()">Consulta tu reserva</button>
+    <button class="boton" onclick="irCancelar()">Cancelar tu reserva</button>
+</div>   
+<center><img src="static/assets/images/cancha.jpg"></center>   
+{% endblock %}
