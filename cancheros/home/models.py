@@ -88,8 +88,8 @@ class Cancha(models.Model):
 
 class CanchaReserva(models.Model):
     id_cancha_reserva = models.IntegerField(primary_key=True)
-    id_reserva = models.ForeignKey('Reserva', models.DO_NOTHING, db_column='id_reserva', blank=True, null=True)
     id_cancha = models.ForeignKey(Cancha, models.DO_NOTHING, db_column='id_cancha', blank=True, null=True)
+    id_reserva = models.ForeignKey('Reserva', models.DO_NOTHING, db_column='id_reserva')
 
     class Meta:
         managed = False
@@ -141,6 +141,40 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
+class HomeCancha(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    cancha_zonal = models.CharField(max_length=45)
+
+    class Meta:
+        managed = False
+        db_table = 'home_cancha'
+
+
+class HomeCanchareserva(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    id_cancha = models.ForeignKey(HomeCancha, models.DO_NOTHING)
+    id_reserva = models.ForeignKey('HomeReserva', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'home_canchareserva'
+
+
+class HomeReserva(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    fecha = models.DateField()
+    hora = models.DateTimeField()
+    num_jugadores = models.IntegerField()
+    petos = models.IntegerField()
+    balones = models.IntegerField()
+    id_usuario = models.ForeignKey('HomeUsuario', models.DO_NOTHING)
+    id_deporte = models.ForeignKey('HomeTipodeporte', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'home_reserva'
+
+
 class HomeRol(models.Model):
     id_rol = models.AutoField(primary_key=True)
     nombre_rol = models.CharField(max_length=45)
@@ -159,6 +193,15 @@ class HomeTipoDocumento(models.Model):
         db_table = 'home_tipo_documento'
 
 
+class HomeTipodeporte(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    nombre_deporte = models.CharField(max_length=45)
+
+    class Meta:
+        managed = False
+        db_table = 'home_tipodeporte'
+
+
 class HomeUsuario(models.Model):
     id = models.BigAutoField(primary_key=True)
     nombre_apellido = models.CharField(max_length=45)
@@ -174,14 +217,16 @@ class HomeUsuario(models.Model):
 
 
 class Reserva(models.Model):
-    id_reserva = models.IntegerField(primary_key=True)
+    id_reserva = models.AutoField(primary_key=True)
     fecha = models.DateField(blank=True, null=True)
     hora = models.TimeField(blank=True, null=True)
     num_jugadores = models.IntegerField(blank=True, null=True)
     petos = models.IntegerField(blank=True, null=True)
     balones = models.IntegerField(blank=True, null=True)
-    id_deporte = models.IntegerField(blank=True, null=True)
+    id_deporte = models.ForeignKey('TipoDeporte', models.DO_NOTHING, db_column='id_deporte', blank=True, null=True)
     id_usuario = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='id_usuario', blank=True, null=True)
+    arbitraje = models.IntegerField(blank=True, null=True)
+    color_uniforme = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -216,13 +261,15 @@ class TipoDocumento(models.Model):
 
 
 class Usuario(models.Model):
-    id_usuario = models.IntegerField(primary_key=True)
-    nombre_apellido = models.CharField(max_length=45, blank=True, null=True)
+    id_usuario = models.AutoField(primary_key=True)
+    nombres = models.CharField(max_length=100, blank=True, null=True)
+    apellidos = models.CharField(max_length=100, blank=True, null=True)
     telefono = models.IntegerField(blank=True, null=True)
     correo = models.CharField(max_length=45, blank=True, null=True)
     numero_documento = models.IntegerField(blank=True, null=True)
     id_rol = models.ForeignKey(Rol, models.DO_NOTHING, db_column='id_rol', blank=True, null=True)
     id_documento = models.ForeignKey(TipoDocumento, models.DO_NOTHING, db_column='id_documento', blank=True, null=True)
+    clave = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         managed = False

@@ -1,54 +1,65 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect;
 from . import models
 from django.contrib import messages
-from .models import Usuario
-from .models import Reserva
+from home.models import Reserva, Usuario, TipoDeporte
 from .forms import UsuarioForm
 from .forms import ReservaForm
 from django.http import HttpResponse
+from .models import Reserva
+
 
 
 #aca se renderisa la pagina web en el index de html
 def index(request):
     return render(request, 'index.html')
 
-def reserva(request):    
-    formulario = ReservaForm(request.POST or None)
-    return render(request, 'reserva.html', {'formulario':formulario})
 
-def usuario(request):
-    usuarios = Usuario.objects.all()
-    return render(request, 'UsuarioForm.html',{'usuarios':usuarios})
+def reserva(request):   
+    print("entro al metodo")
+    resultsdeporte = models.TipoDeporte.objects.all().order_by('nombre_deporte') 
+    form = ReservaForm()
 
-def Usuarioform(request):
-    print("Entrando a la vista Usuarioform_view") 
-    if request.method == 'POST':
-        form = Usuarioform(request.POST)
+    if request.method == 'POST':        
+        form = ReservaForm(request.POST)
         if form.is_valid():
-            usuario = form.save(commit=False)
-            usuario.nombre_apellido = request.POST['nombre_apellido']
-            usuario.telefono =request.POST['telefono']
-            usuario.correo = request.POST['correo']
-            usuario.id_documento = request.POST['id_documento']
-            usuario.numero_documento = request.POST['numero_documento']
-            usuario.id_rol = request.POST['id_rol']            
-            usuario.save()
-            messages.success(request, 'Guardado!')
-            return redirect('usuario')
-
-        else:
-            messages.error(request, form.errors)
-            return redirect('usuario')
+            
+            reserva = form.save(commit=False)
+            
+            # Si necesitas obtener el ID de deporte y usuario, no es necesario hacerlo manualmente aquí,
+            # Django lo maneja automáticamente si los campos son correctos en el formulario.
+            
+            reserva.save()
+                        
+            messages.success(request,'Guardado!')
+            return render(request, 'reservaexitosa.html')
+            #return redirect('nombre_de_tu_vista') # Redirigir a la página de éxito 
+        else:   
+            print(form.errors)  # Esto te ayudará a ver por qué el formulario no es válido
+            messages.error(request, form.errors)                 
+            return render(request, 'reserva.html', context={'lstdeporte': resultsdeporte})
     else:
-        # Obtener los registros de Tipo_Documento y Rol
-        resultsTipoDoc = models.TipoDocumento.objects.all()
-        resultsRol = models.Rol.objects.all().order_by('nombre_rol')
+        # Renderizar la plantilla en caso de GET
+        return render(request, 'reserva.html', context={'lstdeporte': resultsdeporte})
 
-        print("Tipos de Documento:", resultsTipoDoc)  # Agrega esto para verificar si los datos se obtienen correctamente
-        print("Roles:", resultsRol)  # Agrega esto para verificar si los datos se obtienen correctamente
 
+
+def usuario(request):       
+    form = UsuarioForm()
+     # Obtener los registros de Tipo_Documento y Rol
+    resultsTipoDoc = models.TipoDocumento.objects.all()
+    resultsRol = models.Rol.objects.all().order_by('nombre_rol')
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+        if form.is_valid():                       
+            form.save()
+            messages.success(request,'Guardado!')
+            return render(request, 'usuario.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol})
+        else:   
+            messages.error(request, form.errors)
+            
+    else:        
         # Renderizar la plantilla con los datos
-        return render(request, "UsuarioForm.html", context={'tipodoc': resultsTipoDoc, 'lstRol': resultsRol})
+        return render(request, "usuario.html", context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol})
 
 
 #si el método es post es decir envió de información se capturan los datos se guardan en la base de datos

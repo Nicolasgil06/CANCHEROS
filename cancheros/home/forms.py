@@ -1,16 +1,33 @@
-from . import models 
+from django import forms
+from .models import Reserva, Usuario, TipoDeporte
+
+class ReservaForm(forms.ModelForm):
+    class Meta:
+        model = Reserva
+        fields = '__all__'
+
+class UsuarioForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = '__all__'
+        
+        
+        
+        """ from . import models
 from django import forms
 
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
         model = models.Usuario
-        fields= ['nombre_apellido', 
+        fields= ['nombres',
+                 'apellidos', 
                  'telefono',  
                  'correo',
+                 'clave',
                  'id_documento',
                  'numero_documento',
-                 'id_rol',
+                 'id_rol'
                  ]          
 class ReservaForm(forms.ModelForm):
     class Meta:
@@ -21,5 +38,7 @@ class ReservaForm(forms.ModelForm):
                  'petos',
                  'balones',
                  'id_deporte',
-                 'id_usuario'
-                 ]  
+                 'id_usuario',
+                 'arbitraje',
+                 'color_uniforme'
+                  ]   """
