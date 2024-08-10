@@ -1,18 +1,24 @@
 from django.shortcuts import render, redirect
 from . import models
 from django.contrib import messages
-
+from .models import Usuario
+from .models import Reserva
+from .forms import UsuarioForm
+from .forms import ReservaForm
+from django.http import HttpResponse
 
 
 #aca se renderisa la pagina web en el index de html
 def index(request):
     return render(request, 'index.html')
 
-def reserva(request):
-    return render(request, 'reserva.html')
+def reserva(request):    
+    formulario = ReservaForm(request.POST or None)
+    return render(request, 'reserva.html', {'formulario':formulario})
 
 def usuario(request):
-    return render(request, 'UsuarioForm.html')
+    usuarios = Usuario.objects.all()
+    return render(request, 'UsuarioForm.html',{'usuarios':usuarios})
 
 def Usuarioform(request):
     print("Entrando a la vista Usuarioform_view") 

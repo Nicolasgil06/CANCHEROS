@@ -11,5 +11,15 @@ class UsuarioForm(forms.ModelForm):
                  'id_documento',
                  'numero_documento',
                  'id_rol',
-                 ]
-        
+                 ]          
+class ReservaForm(forms.ModelForm):
+    class Meta:
+        model = models.Reserva
+        fields= ['fecha', 
+                 'hora',  
+                 'num_jugadores',
+                 'petos',
+                 'balones',
+                 'id_deporte',
+                 'id_usuario'
+                 ]  
