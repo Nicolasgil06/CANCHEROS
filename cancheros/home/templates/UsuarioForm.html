@@ -3,11 +3,9 @@
 {% load static %}
 {% block content %}
     
-<center>    
+
 <form method="post" enctype="multipart/form-data" action="{% url 'usuario' %}">
     {% csrf_token %}
-
-
   <div class="form-group row">
   <label class="col-sm-2 col-form-label" for="nombre_apellido"> Nombres y Apellidos: </label>
   <input class="form-control col-sm-10" id="nombre_apellido" type="text" name="nombre_apellido" value="{{ object.nombre_apellido }}">
@@ -47,11 +45,10 @@
 
 
   </div>
-
-  
+ 
   
   <input type="submit" value="Guardar" class="btn btn-primary">
 </form>
-</center>
+
 
 {% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<head>
+    <title>Formulario de usuario</title>
+</head>
+
+<body>
+    <h2>Formulario de usuario</h2>
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="nombres" class="form-label">Nombre(s)</label>
+            <input class="input-rounded" type="text" name="nombres" id="nombres">
+        </div>
+        <div>
+            <label for="apellidos" class="form-label">Apellido(s)</label>
+            <input class="input-rounded" type="text" name="apellidos" id="apellidos">
+        </div>
+
+        <div>
+            <label for="telefono" class="form-label">Telefono</label>
+            <input class="input-rounded" type="text" name="telefono" id="telefono">
+        </div>
+
+        <div>
+            <label for="correo" class="form-label">Correo</label>
+            <input type="email" name="correo" id="correo">
+        </div>
+
+        <div>
+            <label for="clave" class="form-label">Contraseña</label>
+            <input type="password" name="clave" id="clave">
+        </div>
+
+        <div>
+            <input type="hidden" id="id_rol" name="id_rol" value="2">
+
+        </div>
+
+        <div>
+            <label for="documento" class="form-label">Tipo Documento</label>
+
+            <select class="form-control" aria-label=".form-select-lg example" name="id_documento" id="id_documento">
+                <option value="-1">Seleccione...</option>
+                {% for itemDoc in lstDoc %}
+                <option value="{{ itemDoc.id_documento }}">{{ itemDoc.nombre_tipo_documento }}</option>
+                {% endfor %}
+            </select>
+            <label for="numero_documento" class="form-label">Numero Documento</label><br>
+            <input type="number" name="numero_documento" id="numero_documento">
+        </div>
+
+
+        <br>
+        <input class="mi-boton" type="submit" value="Guardar" />
+
+    </form>
+
+</body>
+
+
+{% endblock %}

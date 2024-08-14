@@ -46,6 +46,8 @@ h1 {
 }
 
 select,
+input[type="date"],
+input[type="time"],
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -62,6 +64,8 @@ input[type="number"] {
     }
     
 select,
+input[type="date"],
+input[type="time"],
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -161,4 +165,37 @@ button {
 .grid-header {
     font-weight: bold;
     background-color: #27963C; 
+}
+
+.input-rounded {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border: 1px solid #2d9fd9;
+    color: #a0d18c;
+    width: 90%;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 20px;
+    outline: none;
+    border: 1px solid #a0d18c;
+    color: #000000;
+}
+
+.confirmation-box {
+    background-color: #d4edda; /* Fondo verde claro */
+    border: 2px solid #c3e6cb; /* Borde verde más oscuro */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    max-width: 500px; /* Ancho máximo del cuadro */
+    margin: 20px auto; /* Centrar el cuadro horizontalmente */
+    text-align: center; /* Centrar el texto */
+}
+
+/* Estilo para el título */
+.confirmation-box h1 {
+    font-size: 2em; /* Tamaño de fuente grande */
+    font-weight: bold; /* Fuente en negrilla */
+    color: #155724; /* Color del texto verde oscuro */
+    margin: 0; /* Eliminar márgenes */
 }
