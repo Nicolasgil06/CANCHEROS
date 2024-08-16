@@ -1,12 +1,11 @@
-from django.shortcuts import render, redirect;
-from . import models
-from django.contrib import messages
-from home.models import Reserva, Usuario, TipoDeporte
+from  django.shortcuts import render, redirect;
+from .import models
+from  django.contrib import messages
+from  home.models import Reserva ,Usuario, TipoDeporte
 from .forms import UsuarioForm
 from .forms import ReservaForm
-from django.http import HttpResponse
+from  django.http import HttpResponse
 from .models import Reserva
-
 
 
 #aca se renderisa la pagina web en el index de html
@@ -50,16 +49,20 @@ def usuario(request):
     resultsRol = models.Rol.objects.all().order_by('nombre_rol')
     if request.method == 'POST':
         form = UsuarioForm(request.POST)
-        if form.is_valid():                       
+        if form.is_valid(): 
+            print(form.errors)         # lo agrege para validar si hay algun error             
             form.save()
             messages.success(request,'Guardado!')
-            return render(request, 'usuario.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol})
-        else:   
+            return render(request, 'Usuarioexitoso.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol})
+        else:       
             messages.error(request, form.errors)
+        return render(request, 'usuario.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol}) #esto lo agrege por sug de chat
             
     else:        
         # Renderizar la plantilla con los datos
-        return render(request, "usuario.html", context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol})
+        return render(request, 'usuario.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol})
+
+
 
 
 #si el método es post es decir envió de información se capturan los datos se guardan en la base de datos

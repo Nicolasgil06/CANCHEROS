@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends "base.html" %}     <!--lenguaje de plantillas dentro del marco de trabajo de django-->
+{% load static %}                                      
 
 {% block content %}
 
@@ -12,9 +12,9 @@
     <h2>Formulario de reserva</h2>
     <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
-        <div>
+        <div>                                                 <!--contenido y secciones de pagina-->
             <label for="fecha" class="form-label">Fecha</label>
-            <input class="input-rounded" type="date" name="fecha" id="fecha">
+            <input class="input-rounded" type="date" name="fecha" id="fecha">   <!--clase y propiedades del codigo -->
         </div>
         <div>
             <label for="hora" class="form-label">Hora</label>
@@ -59,9 +59,9 @@
         <input class="mi-boton" type="submit" value="Guardar" />
 
     </form>
-
-    {% if form.errors %}
-    <div class="alert alert-danger">
+ <!--tutorial youtube, codigo para verificacion de errores en el formulario-->
+    {% if form.errors %}                
+    <div class="alert alert-danger">  <!--mensaje de advertencia -->
         <ul>
             {% for field in form %}
             {% if field.errors %}
