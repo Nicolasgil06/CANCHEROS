@@ -16,6 +16,8 @@ def index(request):
 def reserva(request):   
     print("entro al metodo")
     resultsdeporte = models.TipoDeporte.objects.all().order_by('nombre_deporte') 
+    resultscancha = models.Cancha.objects.all().order_by('cancha_zonal') 
+
     form = ReservaForm()
 
     if request.method == 'POST':        
@@ -35,11 +37,14 @@ def reserva(request):
         else:   
             print(form.errors)  # Esto te ayudará a ver por qué el formulario no es válido
             messages.error(request, form.errors)                 
-            return render(request, 'reserva.html', context={'lstdeporte': resultsdeporte})
+            return render(request, 'reserva.html', context={'lstdeporte': resultsdeporte, 'lstcancha': resultscancha})
     else:
         # Renderizar la plantilla en caso de GET
-        return render(request, 'reserva.html', context={'lstdeporte': resultsdeporte})
+        return render(request, 'reserva.html', context={'lstdeporte': resultsdeporte, 'lstcancha': resultscancha})
 
+
+def login(request):   
+    return render(request, 'login.html')
 
 
 def usuario(request):       
@@ -50,11 +55,12 @@ def usuario(request):
     if request.method == 'POST':
         form = UsuarioForm(request.POST)
         if form.is_valid(): 
-            print(form.errors)         # lo agrege para validar si hay algun error             
+            print("aqui paso validacion")
             form.save()
             messages.success(request,'Guardado!')
             return render(request, 'Usuarioexitoso.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol})
         else:       
+            print(form.errors)  # Esto te ayudará a ver por qué el formulario no es válido
             messages.error(request, form.errors)
         return render(request, 'usuario.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol}) #esto lo agrege por sug de chat
             

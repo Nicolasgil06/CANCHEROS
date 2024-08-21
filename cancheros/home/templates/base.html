@@ -4,26 +4,93 @@
  
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">       <!--responsive web-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script scr="java.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styles.css' %}">
-    <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>     <!--sweetAlert , libreria para mostrar alertas personalizadas-->
-
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styleIndex.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!--la agregue para los iconos en el menu -->
+    <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
 </head>
+
 <body>
-    <center><img src="{% static 'assets/images/cancheros.png' %}" alt=""></center>    
-    <center>
-        {% block content %}
+    <div style="
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;">
+    <a href="{% url 'login' %}" style="
+        font-size: 16px; 
+        padding: 10px 20px; 
+        margin-right: 10px; 
+        background-color: #25D366; 
+        color: white; 
+        border: 3px solid white; 
+        border-radius: 5px;
+        width: 140px;
+        text-align: center;
+        display: inline-block;
+        text-decoration: none;">
+        Iniciar Sesión
+    </a>
+    <button style="
+        font-size: 16px; 
+        padding: 10px 20px; 
+        background-color: #25D366; 
+        color: white; 
+        border: 3px solid white; 
+        border-radius: 5px;
+        width: 180px;">
+        Cerrar Sesión
+    </button>
+</div>
 
-        {% endblock %}
-    </center>
+<center><img src="{% static 'assets/images/cancheros.png' %}" alt="" width="100px" height="100px"></center>
 
-   <!--  <footer>
-        <p>&copy; 2024 Mi Sitio Web. Todos los derechos reservados.</p>
-    </footer> -->
+<!-- Menú Hamburguesa -->
+<div class="menu-hamburguesa">
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle">
+        <i class='bx bx-menu'></i> Menu
+    </label>
+    <div class="menu">
+        <a href="{% url 'reserva' %}"><i class='bx bx-calendar'></i>Realizar tu reserva</a>
+        <a href="{% url 'usuario' %}"><i class='bx bx-user'></i>Registrar usuario</a>
+        <a href="{% url 'reserva' %}"><i class='bx bx-x-circle'></i>Cancelar tu reserva</a>
+        <div class="social">
+            <a href="https://www.instagram.com/CanchaZonalBonanza"><i class='bx bxl-instagram'></i>@CanchaZonalBonanza</a>
+            <a href="https://www.facebook.com/CanchaBonanza"><i class='bx bxl-facebook'></i>Cancha Bonanza</a>
+            <a href="https://www.twitter.com/CanchaBonanza"><i class='bx bxl-twitter'></i>CanchaBonanza</a>
+            <a href="#"><i class='bx bx-map'></i>Calle 75# 70 50</a>
+        </div>
+        <!-- Botón de Cerrar -->
+        <a href="#" class="close-menu" style="
+            font-size: 16px; 
+            padding: 10px; 
+            background-color: #ff4d4d; 
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;">
+            <i class='bx bx-x'></i> Cerrar
+        </a>
+    </div>
+</div>
 
-     <!-- Cargar el archivo JavaScript -->
-     <script src="{% static 'assets/js/script.js' %}"></script>
-     
+<center>
+    {% block content %}
+    {% endblock %}
+</center>
+
+<script src="{% static 'assets/js/script.js' %}"></script>
+
+<script>
+    document.querySelector('.close-menu').addEventListener('click', function() {
+        document.getElementById('menu-toggle').checked = false;
+    });
+</script>
 </body>
 </html>
