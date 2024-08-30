@@ -5,11 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script scr="java.js"></script>
+    <script src="java.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styleIndex.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!--la agregue para los iconos en el menu -->
     <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styleIndex.css' %}">
 </head>
 
 <body>
@@ -32,7 +32,7 @@
         
         {% endif %}
     </div>
-</div>
+    
 
 <center><img src="{% static 'assets/images/cancheros.png' %}" alt="" width="100px" height="100px"></center>
 
@@ -43,13 +43,15 @@
         <i class='bx bx-menu'></i> Menu
     </label>
     <div class="menu">
+
         {% if request.session.nombre_usuario %}
             <a href="{% url 'reserva' %}"><i class='bx bx-calendar'></i>Realizar reserva</a>
             <a href="{% url 'reserva' %}"><i class='bx bx-x-circle'></i>Cancelar tu reserva</a>
         {% else %}
             <a href="{% url 'usuario' %}"><i class='bx bx-user'></i>Registrar usuario</a>
-            
         {% endif %} 
+        
+
         <div class="social">
             <a href="https://www.instagram.com/CanchaZonalBonanza"><i class='bx bxl-instagram'></i>@CanchaZonalBonanza</a>
             <a href="https://www.facebook.com/CanchaBonanza"><i class='bx bxl-facebook'></i>Cancha Bonanza</a>
