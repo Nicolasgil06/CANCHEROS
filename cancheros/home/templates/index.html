@@ -1,0 +1,78 @@
+{% extends "base.html" %}    
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas del salón comunal Bonanza</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styleIndex.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
+
+   
+</head>
+<body>
+       
+    <!-- Título de Bienvenida -->
+    <div class="title">
+       <strong> Bienvenidos a la página de reservas  de la cancha zonal  Bonanza </strong>
+    </div>
+
+
+    
+
+    <!-- Carrusel de Imágenes -->
+    <div class="carousel">
+        <div class="carousel-images">
+            <div>
+                <img src="{% static 'assets/images/inscripcion_rugby.jpg' %}" alt="Inscríbete a la práctica de Rugby">
+                <div class="carousel-caption"></div>
+            </div>
+            <div>
+                <img src="{% static 'assets/images/futbol1.jpg' %}" alt="Conoce los puntos de hidratación">
+                <div class="carousel-caption"></div>
+            </div>
+            
+            <div>
+                <img src="{% static 'assets/images/rugbytwo.jpg' %}" alt="Cancha para práctica de Rugby">
+                <div class="carousel-caption"></div>
+            </div>
+            <div>
+                <img src="{% static 'assets/images/futbolm.jpg' %}" alt="Espacio de práctica deportiva de Fútbol">
+                <div class="carousel-caption"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de WhatsApp -->
+    <div class="whatsapp-container">
+        <a href="https://wa.me/123456789" class="whatsapp">
+            <i class='bx bxl-whatsapp'></i>
+        </a>
+        <div class="whatsapp-message">
+            <i class='bx bx-chat'></i> Chatea <br> con nosotros
+        </div>
+    </div>
+
+     <script>
+        const images = document.querySelector('.carousel-images');
+        let index = 0;
+
+        function showNextImage() {
+            index++;
+            if (index >= images.children.length) {
+                index = 0;
+            }
+            images.style.transform = `translateX(${-index * 100}%)`;
+        }
+
+        setInterval(showNextImage, 3000);
+    </script>
+</body>
+</html>
+{% endblock %}

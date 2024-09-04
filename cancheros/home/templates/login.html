@@ -1,0 +1,139 @@
+<html lang="en"><head>
+    <title>
+        Django Datta Able -  Login  | AppSeed
+    </title>
+
+    <link rel="canonical" href="https://appseed.us/product/datta-able/django/">
+    <meta name="google-site-verification" content="kCT200-J0rfczENRkJQdYCqsDKkUo3Hvr3KZic_otwU">
+
+    <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 10]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Datta Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs.">
+    <meta name="keywords" content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, datta able, datta able bootstrap admin template, free admin theme, free dashboard template">
+    <meta name="author" content="CodedThemes">
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/images/favicon.ico" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/fonts/fontawesome/css/fontawesome-all.min.css">
+    <!-- animation css -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/plugins/animation/css/animate.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/css/style.css">
+    <!-- dark mode css -->
+    <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/css/dark.css">
+
+    <!-- Specific CSS goes HERE -->
+    
+
+<style>
+        @font-face {
+            font-family: 'NotoSans_online_security'; 
+            src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-regular.woff);
+        }
+
+        @font-face {
+            font-family: 'NotoSans_medium_online_security'; 
+            src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-medium.ttf);
+        }
+
+        @font-face {
+            font-family: 'NotoSans_bold_online_security'; 
+            src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-bold.woff);
+        }
+
+        @font-face {
+            font-family: 'NotoSans_semibold_online_security'; 
+            src: url(chrome-extension://llbcnfanfmjhpedaedhbcnpgeepdnnok/assets/fonts/noto-sans-semibold.ttf);
+        }
+</style></head> 
+<body>
+    
+       
+
+    <div class="auth-wrapper">
+        <div class="auth-content">
+            <div class="auth-bg">
+                <span class="r"></span>
+                <span class="r s"></span>
+                <span class="r s"></span>
+                <span class="r"></span>
+            </div>
+            <div class="card">
+                <div class="card-body text-center">
+
+                    <h3 class="mb-4">Login</h3>
+
+                    <span class="mb-0 text-muted">
+                        
+                            Default Login: <strong>test / ApS12_ZZs8</strong>
+                         
+                    </span>
+
+                    <br>
+                    <br>
+
+                    <form role="form" method="post" action="">
+
+                        <input type="hidden" name="csrfmiddlewaretoken" value="DRxIhdvx0dyvAQYJx4YTlVdQqKyWfqZjKHtzFWf2sgZDHCQ8xmbVD3C5tSIIRTcP">                   
+
+                        <div class="input-group mb-3">
+                            <input type="text" name="username" placeholder="Username" class="form-control" value="test" required="" id="id_username" fdprocessedid="onk753">
+                        </div>
+                        
+                        <div class="input-group mb-4">
+                            <input type="password" name="password" placeholder="Password" class="form-control" value="ApS12_ZZs8" required="" id="id_password" fdprocessedid="8euudg">
+                        </div>
+                        
+                        <button type="submit" name="login" class="btn btn-primary shadow-2 mb-4" fdprocessedid="vwdjxf">Login</button>
+
+                    </form>
+
+                    <p class="mb-0 text-muted">Don’t have an account? <a href="/register/">Sign UP</a></p>
+
+                    <br>
+
+                    
+                    <div class="mx-2">
+                        <form method="post" action="/social_login/github/login/?next=%2F">
+                            <input type="hidden" name="csrfmiddlewaretoken" value="DRxIhdvx0dyvAQYJx4YTlVdQqKyWfqZjKHtzFWf2sgZDHCQ8xmbVD3C5tSIIRTcP">
+                            <button class="btn btn-light" type="submit" style="background-color: #ffffff; border-color: #ffffff;" fdprocessedid="1g6j4">
+                                <i class="feather icon-github auth-icon"></i></button>
+                        </form>
+                        <span class="mx-1">Sign IN with GitHub</span>
+                    </div>                   
+                       
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Enable the dark mode -->
+    <label class="d-none">
+        <i class="icon feather icon-moon" id="theme-indicator"></i>
+        <input type="checkbox" id="theme-switch" class="d-none">
+    </label>
+
+    <script src="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/js/vendor-all.min.js"></script>
+<script src="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/js/pcoded.min.js"></script>
+<script src="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/js/dark-mode.js"></script>
+
+
+    <!-- Specific Page JS goes HERE  -->
+        
+
+
+
+<iframe id="kEHaxPPS" frameborder="0" src="chrome-extension://ekhagklcjbdpajgpjgmbionohlpdbjgc/translateSandbox/translateSandbox.html" style="width: 0px; height: 0px; display: none;"></iframe><span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span></body></html>

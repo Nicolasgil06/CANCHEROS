@@ -1,0 +1,54 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+
+<form method="post" enctype="multipart/form-data" action="{% url 'usuario' %}">
+    {% csrf_token %}
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="nombre_apellido"> Nombres y Apellidos: </label>
+  <input class="form-control col-sm-10" id="nombre_apellido" type="text" name="nombre_apellido" value="{{ object.nombre_apellido }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="telefono">Teléfono: </label>
+  <input class="form-control col-sm-10" id="telefono" type="text" name="telefono" value="{{ object.telefono }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="correo">Correo: </label>
+  <input class="form-control col-sm-10" id="correo" type="text" name="correo" value="{{ object.correo }}">
+  </div>
+  <div class="form-group row">
+  <div class="form-group col-md-6">
+    <label class="form-label" for="id_documento">Tipo de documento</label> <br>
+    <select class="form-control" aria-label=".form-select-lg example" name="id_documento" id="id_documento" >
+          <option value="-1">Seleccione...</option>
+              {% for tipo in tipodoc %}
+                  <option value="{{ tipo.id_documento }}">{{ tipo.nombre_tipo_documento }}</option>
+              {% endfor %}
+    </select>
+ </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label" for="numero_documento">Número Documento: </label>
+    <input class="form-control col-sm-10" id="numero_documento" type="text" name="numero_documento" value="{{ object.numero_documento }}">
+    </div>
+  <div class="form-group row">
+    <label class="form-label" for="itemRol">Rol</label> <br>
+    <select class="form-control" aria-label=".form-select-lg example" name="itemRol" id="itemRol" >
+        <option value="-1">Seleccione...</option>
+            {% for itemRol in lstRol %}
+                <option value="{{ itemRol.id_rol }}">{{ itemRol.nombre_rol }}</option>
+            {% endfor %}
+    </select>
+    
+
+
+  </div>
+ 
+  
+  <input type="submit" value="Guardar" class="btn btn-primary">
+</form>
+
+
+{% endblock %}
