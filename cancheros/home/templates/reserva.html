@@ -1,88 +1,174 @@
-{% extends "base.html" %}     <!--lenguaje de plantillas dentro del marco de trabajo de django-->
-{% load static %}                                      
+{% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const formattedToday = today.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+            document.getElementById('fecha').setAttribute('min', formattedToday);
+        });
+        
+  function validateLetters(input) {
+    // Verifica si se ingresan caracteres no permitidos (cualquier cosa que no sea letras o espacios)
+    if (/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/.test(input.value)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Entrada no válida',
+        text: 'Solo se permiten letras y espacios.',
+      });
+      // Elimina los caracteres no permitidos
+      input.value = input.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');
+    }
+  }
+
+  function validateText() {
+    const inputText = document.getElementById('nombre').value;
+    if (/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/.test(inputText)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Entrada no válida',
+        text: 'Solo se permiten letras y espacios.',
+      });
+      return false;
+    }
+    return true;
+  }
+
+  function validateTime() {
+    const inputTime = document.getElementById('hora').value;
+    const minTime = "07:00";
+    const maxTime = "22:00"; // Cambiado a 22:00 para 10:00 PM
+
+    if (inputTime < minTime || inputTime > maxTime) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Entrada no válida',
+        text: 'Por favor, seleccione una hora entre las 7:00 AM y las 10:00 PM.',
+      });
+      return false;
+    }
+    return true;
+  }
+
+  function validateCancha() {
+    const selectElement = document.getElementById('id_cancha');
+    if (selectElement.value === "") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Selección requerida',
+        text: 'Por favor, seleccione una cancha.',
+      });
+      return false;
+    }
+    return true;
+  }
+
+  function validateArbitraje() {
+    const selectElement = document.getElementById('arbitraje');
+    if (selectElement.value === "") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Selección requerida',
+        text: 'Por favor, seleccione arbitraje.',
+      });
+      return false;
+    }
+    return true;
+  }
+
+  function validateDeporte() {
+    const selectElement = document.getElementById('id_deporte');
+    if (selectElement.value === "") {
+      Swal.fire({
+        icon: 'error',
+        title: 'Selección requerida',
+        text: 'Por favor, seleccione deporte.',
+      });
+      return false;
+    }
+    return true;
+  }
+  function validateForm() {
+    return validateTime() && validateCancha() && validateArbitraje() && validateDeporte();
+  }
+</script>
 
 <head>
-    <title>Formulario de reserva</title>
+  <title>Formulario de reserva</title>
 </head>
 
 <body>
-    <h2>Formulario de reserva</h2>
-    <form enctype="multipart/form-data" method="post">
-        {% csrf_token %}
-        <div>                                                 <!--contenido y secciones de pagina-->
-            <label for="fecha" class="form-label">Fecha</label>
-            <input class="input-rounded" type="date" name="fecha" id="fecha">   <!--clase y propiedades del codigo -->
-        </div>
-        <div>
-            <label for="hora" class="form-label">Hora</label>
-            <input class="input-rounded" type="time" name="hora" id="hora">
-        </div>
-        <div>
-            <label for="id_cancha" class="form-label">Cancha</label>
-            <select class="form-control" name="id_cancha" id="id_cancha">
-                <option value="">Seleccione...</option>
-                {% for itemcancha in lstcancha %}
-                    <option value="{{ itemcancha.id_cancha }}">{{ itemcancha.cancha_zonal }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div>
-            <label for="num_jugadores" class="form-label"># Jugadores</label>
-            <input type="number" name="num_jugadores" id="num_jugadores">
-        </div>
-        <div>
-            <label for="color_uniforme" class="form-label">Color Uniforme</label>
-            <input type="text" name="color_uniforme" id="color_uniforme" maxlength="20">
-        </div>
-        <label for="arbitraje" class="form-label">Arbitraje</label>
-        <select class="form-control" aria-label=".form-select-lg example" name="arbitraje">
-            <option value="-1">Seleccione...</option>
-            <option value="1">Si</option>
-            <option value="0">No</option>
-        </select>
-        <div>
-            <label for="petos" class="form-petos"># Petos</label>
-            <input type="number" name="petos" id="petos">
-        </div>
-        <div>
-            <label for="id_deporte" class="form-label">Tipo Deporte</label>
-            <select class="form-control" name="id_deporte" id="id_deporte">
-                <option value="">Seleccione...</option>
-                {% for itemDep in lstdeporte %}
-                <option value="{{ itemDep.id_deporte }}">{{ itemDep.nombre_deporte }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div>
-            <label for="balones" class="form-petos"># Balones</label>
-            <input type="number" name="balones" id="balones">
-        </div>
-
-        <input type="hidden" id="id_usuario" name="id_usuario" value="1">
-
-
-        <br>
-        <input class="mi-boton" type="submit" value="Guardar" />
-
-    </form>
- <!--tutorial youtube, codigo para verificacion de errores en el formulario-->
-    {% if form.errors %}                
-    <div class="alert alert-danger">  <!--mensaje de advertencia -->
-        <ul>
-            {% for field in form %}
-            {% if field.errors %}
-            <li>{{ field.label }}: {{ field.errors }}</li>
-            {% endif %}
-            {% endfor %}
-        </ul>
+  <h2>Formulario de reserva</h2>
+  <form enctype="multipart/form-data" method="post" onsubmit="return validateForm()">
+    {% csrf_token %}
+    <div>
+      <label for="fecha" class="form-label">Fecha</label>
+      <input class="input-rounded" type="date" name="fecha" id="fecha" min="{{ hoy }}"required>
     </div>
-    {% endif %}
+    <div>
+      <label for="hora" class="form-label">Hora</label>
+      <input class="input-rounded" type="time" name="hora" id="hora" min="07:00" max="22:00" required>
+    </div>
+    <div>
+      <label for="id_cancha" class="form-label">Cancha</label>
+      <select class="form-control" name="id_cancha" id="id_cancha">
+        <option value="">Seleccione...</option>
+        {% for itemcancha in lstcancha %}
+          <option value="{{ itemcancha.id_cancha }}">{{ itemcancha.cancha_zonal }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="num_jugadores" class="form-label"># Jugadores</label>
+      <input type="number" name="num_jugadores" id="num_jugadores" min="1" step="1" required>
+    </div>
+    <div>
+      <label for="color_uniforme" class="form-label">Color Uniforme</label>
+      <input type="text" name="color_uniforme" id="color_uniforme" maxlength="20" oninput="validateLetters(this)" title="Solo se permiten letras y espacios" required>
+    </div>
+    <label for="arbitraje" class="form-label">Arbitraje</label>
+    <select class="form-control" aria-label=".form-select-lg example" name="arbitraje" id="arbitraje">
+      <option value="">Seleccione...</option>
+      <option value="1">Si</option>
+      <option value="0">No</option>
+    </select>
+    <div>
+      <label for="petos" class="form-petos"># Petos</label>
+      <input type="number" name="petos" id="petos" min="1" step="1" required>
+    </div>
+    <div>
+      <label for="id_deporte" class="form-label">Tipo Deporte</label>
+      <select class="form-control" name="id_deporte" id="id_deporte">
+        <option value="">Seleccione...</option>
+        {% for itemDep in lstdeporte %}
+        <option value="{{ itemDep.id_deporte }}">{{ itemDep.nombre_deporte }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="balones" class="form-petos"># Balones</label>
+      <input type="number" name="balones" id="balones" min="1" step="1" required>
+    </div>
 
+    <input type="hidden" id="id_usuario" name="id_usuario" value="1">
 
+    <br>
+    <input class="mi-boton" type="submit" value="Guardar" />
+  </form>
+  <!--tutorial youtube, codigo para verificacion de errores en el formulario-->
+  {% if form.errors %}
+  <div class="alert alert-danger">
+    <ul>
+      {% for field in form %}
+      {% if field.errors %}
+      <li>{{ field.label }}: {{ field.errors }}</li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
 </body>
-
 
 {% endblock %}

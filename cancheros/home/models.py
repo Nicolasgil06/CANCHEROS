@@ -265,12 +265,12 @@ class Usuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     nombres = models.CharField(max_length=100, blank=True, null=True)
     apellidos = models.CharField(max_length=100, blank=True, null=True)
-    telefono = models.IntegerField(blank=True, null=True)
-    correo = models.CharField(max_length=45, blank=True, null=True)
+    telefono = models.CharField(max_length=60, blank=True, null=True)
+    correo = models.CharField(max_length=100, blank=True, null=True)
     numero_documento = models.CharField(max_length=60, blank=True, null=True)
     id_rol = models.ForeignKey(Rol, models.DO_NOTHING, db_column='id_rol', blank=True, null=True)
     id_documento = models.ForeignKey(TipoDocumento, models.DO_NOTHING, db_column='id_documento', blank=True, null=True)
-    clave = models.CharField(max_length=50, blank=True, null=True)
+    clave = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False

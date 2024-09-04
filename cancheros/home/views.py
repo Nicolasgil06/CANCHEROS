@@ -1,4 +1,6 @@
-from  django.shortcuts import render, redirect;
+from django.contrib.auth.hashers import make_password
+from  django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from .import models
 from  django.contrib import messages
 from  home.models import Reserva ,Usuario, TipoDeporte
@@ -6,7 +8,37 @@ from .forms import UsuarioForm
 from .forms import ReservaForm
 from  django.http import HttpResponse
 from .models import Reserva
+from django.contrib import messages
 
+def login_view(request):
+    print("entro al metodo")
+    if request.method == 'POST':
+        print("entro al post")
+        username = request.POST['Username']
+        password = request.POST['Password']
+        print(username)
+        print(password)
+        user = authenticate(request, username=username, password=password)
+        print(user)
+        
+        if user is not None:
+            print("entro afirmativo")
+            login(request)
+            # Guardar una variable en la sesión
+            request.session['nombre_usuario'] = user.nombres  # Suponiendo que 'nombres' es un campo en tu modelo de usuario
+            messages.success(request, f'Bienvenido, {user.nombres}!')
+            return redirect('inicio')  # Redirigir a la página de inicio u otra página
+        else:
+            print("entro negativo")
+            messages.error(request, 'Credenciales incorrectas, intente nuevamente.')
+            return redirect('login')
+    else:
+        return render(request, 'login.html')
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, 'Has cerrado sesión correctamente.')
+    return redirect('login')
 
 #aca se renderisa la pagina web en el index de html
 def index(request):
@@ -14,7 +46,7 @@ def index(request):
 
 
 def reserva(request):   
-    print("entro al metodo")
+    
     resultsdeporte = models.TipoDeporte.objects.all().order_by('nombre_deporte') 
     resultscancha = models.Cancha.objects.all().order_by('cancha_zonal') 
 
@@ -24,6 +56,7 @@ def reserva(request):
         form = ReservaForm(request.POST)
         if form.is_valid():
             
+
             reserva = form.save(commit=False)
             
             # Si necesitas obtener el ID de deporte y usuario, no es necesario hacerlo manualmente aquí,
@@ -48,27 +81,35 @@ def login(request):
 
 
 def usuario(request):       
+    print("entra a usuario")
+    print(request.method)
     form = UsuarioForm()
      # Obtener los registros de Tipo_Documento y Rol
     resultsTipoDoc = models.TipoDocumento.objects.all()
     resultsRol = models.Rol.objects.all().order_by('nombre_rol')
     if request.method == 'POST':
+        print("entra al post")
         form = UsuarioForm(request.POST)
-        if form.is_valid(): 
+        if form.is_valid():             
             print("aqui paso validacion")
-            form.save()
+            usuario = form.save(commit=False)  # No guardar aún en la base de datos
+            usuario.clave = make_password(form.cleaned_data['clave'])  # Encriptar la contraseña
+            usuario.save()  # Ahora sí, guardar en la base de datos
             messages.success(request,'Guardado!')
             return render(request, 'Usuarioexitoso.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol})
-        else:       
-            print(form.errors)  # Esto te ayudará a ver por qué el formulario no es válido
+        else:    
+            print("entra a errort")   
+            print(form.errors)  # ayudará a ver por qué el formulario no es válido
             messages.error(request, form.errors)
         return render(request, 'usuario.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol}) #esto lo agrege por sug de chat
             
     else:        
+        print("entra a devolverso")
         # Renderizar la plantilla con los datos
         return render(request, 'usuario.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol})
 
-
+def cancelar(request):
+    return render(request, 'cancelarreserva.html')
 
 
 #si el método es post es decir envió de información se capturan los datos se guardan en la base de datos

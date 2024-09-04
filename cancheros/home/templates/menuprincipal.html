@@ -5,15 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script scr="java.js"></script>
+    <script src="java.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styleIndex.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!--la agregue para los iconos en el menu -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styleIndex.css' %}">
     <!-- Incluir el archivo CSS de SweetAlert -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">  
     <!-- Incluir el archivo JS de SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
 </head>
 
 <body>
@@ -36,7 +37,7 @@
         
         {% endif %}
     </div>
-</div>
+    
 
 <center><img src="{% static 'assets/images/cancheros.png' %}" alt="" width="100px" height="100px"></center>
 
@@ -47,18 +48,20 @@
         <i class='bx bx-menu'></i> Menu
     </label>
     <div class="menu">
+
         {% if request.session.nombre_usuario %}
             <a href="{% url 'reserva' %}"><i class='bx bx-calendar'></i>Realizar reserva</a>
             <a href="{% url 'cancelar' %}"><i class='bx bx-x-circle'></i>Cancelar tu reserva</a>
         {% else %}
             <a href="{% url 'usuario' %}"><i class='bx bx-user'></i>Registrar usuario</a>
-            
         {% endif %} 
+        
+
         <div class="social">
             <a href="https://www.instagram.com/CanchaZonalBonanza"><i class='bx bxl-instagram'></i>@CanchaZonalBonanza</a>
             <a href="https://www.facebook.com/CanchaBonanza"><i class='bx bxl-facebook'></i>Cancha Bonanza</a>
             <a href="https://www.twitter.com/CanchaBonanza"><i class='bx bxl-twitter'></i>CanchaBonanza</a>
-            <a href="https://www.google.com/maps?q=Calle+75%23+70+50" target="_blank"><i class='bx bx-map'></i><strong>Calle 75# 70 50</strong></a>
+            <a href="#"><i class='bx bx-map'> <strong></i>Calle 75# 70 50</a></strong>
         </div>
         <!-- Botón de Cerrar -->
         <a href="#" class="close-menu" style="
