@@ -81,29 +81,35 @@ def login(request):
 
 
 def usuario(request):       
+    print("entra a usuario")
+    print(request.method)
     form = UsuarioForm()
      # Obtener los registros de Tipo_Documento y Rol
     resultsTipoDoc = models.TipoDocumento.objects.all()
     resultsRol = models.Rol.objects.all().order_by('nombre_rol')
     if request.method == 'POST':
+        print("entra al post")
         form = UsuarioForm(request.POST)
-        if form.is_valid(): 
+        if form.is_valid():             
             print("aqui paso validacion")
             usuario = form.save(commit=False)  # No guardar aún en la base de datos
             usuario.clave = make_password(form.cleaned_data['clave'])  # Encriptar la contraseña
             usuario.save()  # Ahora sí, guardar en la base de datos
             messages.success(request,'Guardado!')
             return render(request, 'Usuarioexitoso.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol})
-        else:       
+        else:    
+            print("entra a errort")   
             print(form.errors)  # ayudará a ver por qué el formulario no es válido
             messages.error(request, form.errors)
         return render(request, 'usuario.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol}) #esto lo agrege por sug de chat
             
     else:        
+        print("entra a devolverso")
         # Renderizar la plantilla con los datos
         return render(request, 'usuario.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol})
 
-
+def cancelar(request):
+    return render(request, 'cancelarreserva.html')
 
 
 #si el método es post es decir envió de información se capturan los datos se guardan en la base de datos

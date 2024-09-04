@@ -31,6 +31,11 @@
     <!-- dark mode css -->
     <link rel="stylesheet" href="https://appsrv1-147a1.kxcdn.com/data-able-v100-enh1/css/dark.css">
 
+    <!-- Incluir el archivo CSS de SweetAlert -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">  
+    <!-- Incluir el archivo JS de SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Specific CSS goes HERE -->
     
 
@@ -87,6 +92,19 @@
                         <button type="submit" name="login" class="btn btn-primary shadow-2 mb-4">Entrar</button>
                     </form>
 
+                    <!-- Mostrar mensajes de Django -->
+                    {% if messages %}
+                        <script>
+                            {% for message in messages %}
+                                Swal.fire({
+                                    icon: '{{ message.tags }}',
+                                    title: '¡{{ message.tags|title }}!',
+                                    text: '{{ message }}',
+                                });
+                            {% endfor %}
+                        </script>
+                    {% endif %}
+
                     <p class="mb-0 text-muted">¿Tienes una cuenta? <a href="/usuario/">Registrate</a></p>
 
                     <br>                 
@@ -97,7 +115,7 @@
         </div>
     </div>
 
-
+    
 
     <!-- Enable the dark mode -->
     <label class="d-none">
