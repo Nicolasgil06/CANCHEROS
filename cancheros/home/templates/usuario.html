@@ -2,7 +2,87 @@
 {% load static %}
 
 {% block content %}
+<script>
+    
+  function validateName() {
+    const inputName = document.getElementById('nombres').value;
+    if (/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/.test(inputName)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Entrada no válida',
+        text: 'El nombre solo puede contener letras y espacios.',
+      });
+      return false;
+    }
+    return true;
+}
 
+function validateLastname() {
+    const inputName = document.getElementById('apellidos').value;
+    if (/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/.test(inputName)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Entrada no válida',
+        text: 'El apellido solo puede contener letras y espacios.',
+      });
+      return false;
+    }
+    return true;
+}
+
+function validatePhone() {
+    const inputPhone = document.getElementById('telefono').value;
+    if (/[^0-9]/.test(inputPhone)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Entrada no válida',
+            text: 'El Telefono solo puede contener números.',
+        });
+        return false;
+    }
+    return true;
+}
+function validateEmail() {
+    const inputEmail = document.getElementById('correo').value;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|co)$/;
+    
+    if (!emailPattern.test(inputEmail)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Correo no válido',
+            text: 'El correo debe contener "@" y terminar en ".com" o ".co".',
+        });
+        return false;
+    }
+    return true;
+}
+
+function validateDocumentType() {
+    const documentSelect = document.getElementById('id_documento');
+    if (documentSelect.value === "-1") {
+        Swal.fire({
+            icon: 'error',
+            title: 'Selección requerida',
+            text: 'Debe seleccionar un tipo de documento.',
+        });
+        return false;
+    }
+    return true;
+}
+
+function validateDocumentNumber() {
+    const documentNumber = document.getElementById('numero_documento').value;
+    if (/[^0-9]/.test(documentNumber)) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Entrada no válida',
+            text: 'El  documento solo puede contener numeros.',
+        });
+        return false;
+    }
+    return true;
+}
+</script>
 
 <head>
     <title>Formulario de usuario</title>
@@ -14,26 +94,26 @@
         {% csrf_token %}
         <div>
             <label for="nombres" class="form-label">Nombre(s)</label>
-            <input class="input-rounded" type="text" name="nombres" id="nombres" maxlength="100">
+            <input class="input-rounded" type="text" name="nombres" id="nombres" maxlength="100" required onblur="validateName()">
         </div>
         <div>
             <label for="apellidos" class="form-label">Apellido(s)</label>
-            <input class="input-rounded" type="text" name="apellidos" id="apellidos" maxlength="100">
+            <input class="input-rounded" type="text" name="apellidos" id="apellidos" maxlength="100"required onblur="validateLastname()" >
         </div>
 
         <div>
             <label for="telefono" class="form-label">Telefono</label>
-            <input class="input-rounded" type="text" name="telefono" id="telefono" maxlength="60">
+            <input class="input-rounded" type="text" name="telefono" id="telefono" maxlength="60"required onblur="validatePhone()">
         </div>
 
         <div>
             <label for="correo" class="form-label">Correo</label>
-            <input type="email" name="correo" id="correo" maxlength="100">
+            <input type="email" name="correo" id="correo" maxlength="100"required onblur="validateEmail()">
         </div>
 
         <div>
             <label for="clave" class="form-label">Contraseña</label>
-            <input type="password" name="clave" id="clave" maxlength="5">
+            <input type="password" name="clave" id="clave" maxlength="10"required>
         </div>
 
         <div>
@@ -44,14 +124,14 @@
         <div>
             <label for="documento" class="form-label">Tipo Documento</label>
 
-            <select class="form-control" aria-label=".form-select-lg example" name="id_documento" id="id_documento">
+            <select class="form-control" aria-label=".form-select-lg example" name="id_documento" id="id_documento" required onblur="validateDocumentType()">
                 <option value="-1">Seleccione...</option>
                 {% for itemDoc in lstDoc %}
                 <option value="{{ itemDoc.id_documento }}">{{ itemDoc.nombre_tipo_documento }}</option>
                 {% endfor %}
             </select>
             <label for="numero_documento" class="form-label">Numero Documento</label><br>
-            <input type="text" name="numero_documento" id="numero_documento" maxlength="60">
+            <input type="text" name="numero_documento" id="numero_documento" maxlength="60"required onblur="validateDocumentNumber()">
         </div>
 
 
