@@ -17,13 +17,20 @@
    
 </head>
 <body>
+    <style>
+        body {
+            background-image: url("{% static 'assets/images/iarugby.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Si quieres que la imagen permanezca fija al hacer scroll */
+        }
+    </style>
        
     <!-- Título de Bienvenida -->
-    <div class="title">
+    <div class="title"> <br>
        <strong> Bienvenidos a la página de reservas  de la cancha zonal  Bonanza </strong>
     </div>
-
-
     
 
     <!-- Carrusel de Imágenes -->
@@ -46,6 +53,7 @@
                 <img src="{% static 'assets/images/futbolm.jpg' %}" alt="Espacio de práctica deportiva de Fútbol">
                 <div class="carousel-caption"></div>
             </div>
+            
         </div>
     </div>
 

@@ -1,6 +1,7 @@
 from django.contrib.auth.hashers import make_password
 from  django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from .import models
 from  django.contrib import messages
 from  home.models import Reserva ,Usuario, TipoDeporte
@@ -9,6 +10,7 @@ from .forms import ReservaForm
 from  django.http import HttpResponse
 from .models import Reserva
 from django.contrib import messages
+from django.shortcuts import render
 
 def login_view(request):
     print("entro al metodo")
@@ -25,7 +27,8 @@ def login_view(request):
             print("entro afirmativo")
             login(request)
             # Guardar una variable en la sesión
-            request.session['nombre_usuario'] = user.nombres  # Suponiendo que 'nombres' es un campo en tu modelo de usuario
+            request.session['nombre_usuario'] = user.nombres
+            request.session['idUsuario']  = user.id_usuario
             messages.success(request, f'Bienvenido, {user.nombres}!')
             return redirect('inicio')  # Redirigir a la página de inicio u otra página
         else:
@@ -40,7 +43,16 @@ def logout_view(request):
     messages.success(request, 'Has cerrado sesión correctamente.')
     return redirect('login')
 
-#aca se renderisa la pagina web en el index de html
+
+def mis_reservas(request):    
+    id_usuario = request.session.get('idUsuario')  # Usa get para evitar KeyError    
+    if id_usuario:        
+        reservas = Reserva.objects.filter(id_usuario=id_usuario)
+    else:
+        reservas = []  # O redirige al usuario a una página de error o inicio de sesión
+    return render(request, 'mis_reservas.html', {'reservas': reservas})
+
+
 def index(request):
     return render(request, 'index.html')
 
@@ -108,8 +120,7 @@ def usuario(request):
         # Renderizar la plantilla con los datos
         return render(request, 'usuario.html', context={'lstDoc': resultsTipoDoc, 'lstRol': resultsRol})
 
-def cancelar(request):
-    return render(request, 'cancelarreserva.html')
+
 
 
 #si el método es post es decir envió de información se capturan los datos se guardan en la base de datos

@@ -4,6 +4,11 @@
 {% block content %}
 
 <script>
+
+  function validateNumber(input) {
+    // Elimina cualquier carácter no numérico
+    input.value = input.value.replace(/[^0-9]/g, '');
+  }
     document.addEventListener('DOMContentLoaded', function() {
             const today = new Date();
             const formattedToday = today.toISOString().split('T')[0]; // Formato YYYY-MM-DD
@@ -95,12 +100,9 @@
   }
 </script>
 
-<head>
-  <title>Formulario de reserva</title>
-</head>
 
 <body>
-  <h2>Formulario de reserva</h2>
+  <h2 class="h2">Formulario de reserva</h2>
   <form enctype="multipart/form-data" method="post" onsubmit="return validateForm()">
     {% csrf_token %}
     <div>
@@ -122,7 +124,7 @@
     </div>
     <div>
       <label for="num_jugadores" class="form-label"># Jugadores</label>
-      <input type="number" name="num_jugadores" id="num_jugadores" min="1" step="1" required>
+      <input type="number" name="num_jugadores" id="num_jugadores" min="1" step="1" required oninput="validateNumber(this)">
     </div>
     <div>
       <label for="color_uniforme" class="form-label">Color Uniforme</label>
@@ -152,7 +154,8 @@
       <input type="number" name="balones" id="balones" min="1" step="1" required>
     </div>
 
-    <input type="hidden" id="id_usuario" name="id_usuario" value="1">
+    
+    <input type="hidden" id="id_usuario" name="id_usuario" value="{{ request.session.idUsuario }}">
 
     <br>
     <input class="mi-boton" type="submit" value="Guardar" />

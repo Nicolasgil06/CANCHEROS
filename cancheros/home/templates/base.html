@@ -26,7 +26,7 @@
             align-items: center;">
         {% if request.session.nombre_usuario %}
             {{ request.session.nombre_usuario }}
-            &nbsp;
+            &nbsp; 
             <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <button type="submit" class="boton2">Cerrar Sesión</button>
@@ -49,7 +49,7 @@
     <div class="menu">
         {% if request.session.nombre_usuario %}
             <a href="{% url 'reserva' %}"><i class='bx bx-calendar'></i>Realizar reserva</a>
-            <a href="{% url 'cancelar' %}"><i class='bx bx-x-circle'></i>Cancelar tu reserva</a>
+            <a href="{% url 'mis_reservas' %}"><i class='bx bx-x-circle'></i>Mis Reservas</a>
         {% else %}
             <a href="{% url 'usuario' %}"><i class='bx bx-user'></i>Registrar usuario</a>
             
@@ -61,17 +61,8 @@
             <a href="https://www.google.com/maps?q=Calle+75%23+70+50" target="_blank"><i class='bx bx-map'></i><strong>Calle 75# 70 50</strong></a>
         </div>
         <!-- Botón de Cerrar -->
-        <a href="#" class="close-menu" style="
-            font-size: 16px; 
-            padding: 10px; 
-            background-color: #f96e6e; 
-            color: white;
-            text-align: center;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;">
-            <i class='bx bx-x'></i> Cerrar
+        <a href="#" class="close-menu">
+            <i class='bx bx-x'></i> <strong>Cerrar</strong>
         </a>
     </div>
 </div>

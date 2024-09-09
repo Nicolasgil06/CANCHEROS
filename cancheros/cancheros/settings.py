@@ -137,6 +137,9 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_URL = '/accounts/login/'
+
+
 AUTHENTICATION_BACKENDS = [
     'home.backends.UsuarioBackend',
     'django.contrib.auth.backends.ModelBackend',

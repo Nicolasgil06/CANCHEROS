@@ -1,0 +1,51 @@
+{% extends "menuprincipal.html" %}    
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+    <!-- Cargar Bootstrap CSS desde un CDN -->
+    
+</head>
+<body>
+{% if reservas %}
+    <div class="container mt-5">
+            <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Número de Reserva</th>
+                    <th scope="col">Fecha de la Reserva</th>
+                    <th scope="col">Hora de la Reserva</th>
+                    <th scope="col">Deporte</th>
+                    <th scope="col">Cancha</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>             
+                {% for reserva in reservas %}
+                    <tr>
+                        <td>{{ reserva.id_reserva }}</td>
+                        <td>{{ reserva.fecha }}</td>
+                        <td>{{ reserva.hora }}</td>
+                        <td>{{ reserva.id_deporte.nombre_deporte }}</td>
+                        <td>{{ reserva.id_cancha.cancha_zonal }}</td>
+                        <td><button class="btn btn-danger">X Cancelar Reserva</button></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <h2>No tienes reservas.</h2>
+{% endif %}
+
+<!-- Cargar Bootstrap JS y Popper.js desde un CDN -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+
+</body>
+</html>
+{% endblock %}
