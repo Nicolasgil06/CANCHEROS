@@ -75,7 +75,7 @@ s
 }
 
 .menu-hamburguesa .menu a:hover {
-    background-color: #556B2F;
+    background-color: #839a5c;
 }
 
 .menu-hamburguesa .menu .social {
@@ -213,3 +213,47 @@ s
     transition: background-color 0.3s ease;
     
 }
+
+.h3 {
+    background-color: #50ce7e; 
+
+
+}
+
+/* Reserva generada con exito*/
+.confirmation-box-reservaexitosa {
+    background-color: rgb(134, 124, 124);  /* Color de fondo gris claro */
+    color: #fbfefc;  /* Color del texto verde */
+    padding: 10px;
+    border-radius: 20px; /* Redondear los bordes del cuadro */
+    border: 3px solid #fff;
+    text-align: center; /* Centrar el texto */
+    max-width: 600px; /* Establece el ancho máximo del div */
+    margin: 0 auto; /* Centra el div horizontalmente */
+    font-weight: bold; /* Hace que el texto sea negrita */
+}
+
+.confirmation-user {
+    background-color: rgb(134, 124, 124);  /* Color de fondo gris claro */
+    color: #fbfefc;  /* Color del texto verde */
+    padding: 10px;
+    border-radius: 20px; /* Redondear los bordes del cuadro */
+    border: 3px solid #fff;
+    text-align: center; /* Centrar el texto */
+    max-width: 600px; /* Establece el ancho máximo del div */
+    margin: 0 auto; /* Centra el div horizontalmente */
+    font-weight: bold; /* Hace que el texto sea negrita */
+}
+.no-reservas{
+    background-color: rgb(134, 124, 124);  /* Color de fondo gris claro */
+    color: #fbfefc;  /* Color del texto verde */
+    padding: 10px;
+    border-radius: 20px; /* Redondear los bordes del cuadro */
+    border: 3px solid #fff;
+    text-align: center; /* Centrar el texto */
+    max-width: 600px; /* Establece el ancho máximo del div */
+    margin: 0 auto; /* Centra el div horizontalmente */
+    font-weight: bold; /* Hace que el texto sea negrita */
+}
+
+
