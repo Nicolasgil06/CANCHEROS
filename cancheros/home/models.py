@@ -227,7 +227,7 @@ class Reserva(models.Model):
     id_usuario = models.ForeignKey('Usuario', models.DO_NOTHING, db_column='id_usuario', blank=True, null=True)
     arbitraje = models.IntegerField(blank=True, null=True)
     color_uniforme = models.CharField(max_length=20, blank=True, null=True)
-    id_cancha = models.IntegerField(blank=True, null=True)
+    id_cancha = models.ForeignKey(Cancha, models.DO_NOTHING, db_column='id_cancha', blank=True, null=True)
 
     class Meta:
         managed = False

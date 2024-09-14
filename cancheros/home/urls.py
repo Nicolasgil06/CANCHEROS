@@ -1,6 +1,7 @@
 from django.urls import path,include
 from . import views 
 from .views import login_view, logout_view
+from .views import mis_reservas
 
 
 urlpatterns = [
@@ -10,8 +11,8 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('inicio/', views.index, name='inicio'),
-    path('cancelar/', views.cancelar, name='cancelar')
-    
+    path('cancelar_reserva/<int:id_reserva>/', views.cancelar_reserva, name='cancelar_reserva'),
+    path('mis_reservas/', views.mis_reservas, name='mis_reservas') 
     
 
 ]

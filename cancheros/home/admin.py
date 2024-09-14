@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+admin.site.register(Reserva)
+admin.site.register(TipoDeporte)
+admin.site.register(TipoDocumento)
+admin.site.register(CanchaReserva)
+admin.site.register(Usuario)
